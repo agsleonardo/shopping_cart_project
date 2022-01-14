@@ -12,6 +12,7 @@ describe('1 - Teste a função fecthProducts', () => {
 
   // })
 
+  
   // it('Teste se, ao chamar a função fetchProducts com o argumento "computador", a função fetch utiliza o endpoint "https://api.mercadolibre.com/sites/MLB/search?q=computador";', () => {
 
   // })
