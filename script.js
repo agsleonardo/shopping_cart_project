@@ -63,7 +63,6 @@ const addToCart = async () => {
 const init = async () => {
   await spreadProducts();
   addToCart();
-  listCart.addEventListener('click', (ev) => cartItemClickListener(ev));
 };
 
 window.onload = () => init();
