@@ -40,12 +40,16 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
-const init = async () => {
+const fillProducts = async () => {
   const { results } = await fetchProducts('computador');
   const container = document.querySelector('.items');
   results.forEach(({ id: sku, title: name, thumbnail: image }) => {
     container.appendChild(createProductItemElement({ sku, name, image }));
   });
+};
+
+const init = () => {
+  fillProducts();
 };
 
 window.onload = () => init();
