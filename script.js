@@ -1,3 +1,5 @@
+const listCart = document.querySelector('.cart__items');
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -29,7 +31,7 @@ function getSkuFromProductItem(item) {
 }
 
 function cartItemClickListener(event) {
-  // coloque seu código aqui
+  listCart.removeChild(event.target);
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -50,17 +52,17 @@ const spreadProducts = async () => {
 
 const addToCart = async () => {
   const button = document.querySelectorAll('.item__add');
-  const list = document.querySelector('.cart__items');
   button.forEach((btn) => btn.addEventListener('click', async (ev) => {
     const itemId = ev.target.parentNode.firstChild.innerText;
     const { id, title, price } = await fetchItem(itemId);
-    list.appendChild(createCartItemElement({ sku: id, name: title, salePrice: price }));
+    listCart.appendChild(createCartItemElement({ sku: id, name: title, salePrice: price }));
   }));
 };
 
 const init = async () => {
   await spreadProducts();
   addToCart();
+  listCart.addEventListener('click', (ev) => cartItemClickListener(ev));
 };
 
 window.onload = () => init();
