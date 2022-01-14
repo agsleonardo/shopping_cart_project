@@ -40,7 +40,7 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
-const fillProducts = async () => {
+const spreadProducts = async () => {
   const { results } = await fetchProducts('computador');
   const container = document.querySelector('.items');
   results.forEach(({ id: sku, title: name, thumbnail: image }) => {
@@ -49,7 +49,7 @@ const fillProducts = async () => {
 };
 
 const init = () => {
-  fillProducts();
+  spreadProducts();
 };
 
 window.onload = () => init();
