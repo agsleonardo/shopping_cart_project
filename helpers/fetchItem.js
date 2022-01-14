@@ -1,5 +1,8 @@
-const fetchItem = () => {
-  // seu código aqui
+const fetchItem = (item) => {
+  const END_POINT = `https://api.mercadolibre.com/items/${item}`;
+  return fetch(END_POINT)
+  .then((res) => res.json())
+  .catch((err) => { throw new Error('You must provide an url'); });
 };
 
 if (typeof module !== 'undefined') {
