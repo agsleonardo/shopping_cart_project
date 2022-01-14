@@ -55,7 +55,8 @@ const addToCart = async () => {
   button.forEach((btn) => btn.addEventListener('click', async (ev) => {
     const itemId = ev.target.parentNode.firstChild.innerText;
     const { id, title, price } = await fetchItem(itemId);
-    listCart.appendChild(createCartItemElement({ sku: id, name: title, salePrice: price }));
+    const newItem = createCartItemElement({ sku: id, name: title, salePrice: price });
+    listCart.appendChild(newItem);
   }));
 };
 
