@@ -48,8 +48,17 @@ const spreadProducts = async () => {
   });
 };
 
-const init = () => {
-  spreadProducts();
+const addToCart = () => {
+  const button = document.querySelectorAll('.item__add');
+  const list = document.querySelector('.cart__items');
+  button.forEach((btn) => btn.addEventListener('click', (ev) => {
+    const id = ev.target.parentNode.firstChild.innerText;
+  }));
+};
+
+const init = async () => {
+  await spreadProducts();
+  addToCart();
 };
 
 window.onload = () => init();
