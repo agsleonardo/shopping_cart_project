@@ -41,9 +41,9 @@ function createCartItemElement({ sku, name, salePrice }) {
 }
 
 const init = async () => {
-  const data = await fetchProducts('computador');
+  const { results } = await fetchProducts('computador');
   const container = document.querySelector('.items');
-  data.forEach(({ id: sku, title: name, thumbnail: image }) => {
+  results.forEach(({ id: sku, title: name, thumbnail: image }) => {
     container.appendChild(createProductItemElement({ sku, name, image }));
   });
 };
