@@ -3,7 +3,6 @@ const fetchProducts = (query) => {
 
   return fetch(END_POINT)
   .then((res) => res.json())
-  .then(({ results }) => results)
   .catch((err) => console.log(err));
 };
 
