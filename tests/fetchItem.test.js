@@ -21,8 +21,9 @@ describe('2 - Teste a função fecthItem', () => {
     expect(data).toEqual(item);
   })
 
-  // it(`Teste se, ao chamar a função fetchItem sem argumento, retorna um erro com a mensagem: You must provide an url. Dica: Lembre-se de usar o new Error('mensagem esperada aqui') para comparar com o objeto retornado da API`, () => {
+  it(`Teste se, ao chamar a função fetchItem sem argumento, retorna um erro com a mensagem: You must provide an url. Dica: Lembre-se de usar o new Error('mensagem esperada aqui') para comparar com o objeto retornado da API`, async () => {
+    await expect(fetchItem()).rejects.toThrow('You must provide an url')
 
-  // })
+  })
 
 });
