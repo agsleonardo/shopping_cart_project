@@ -48,11 +48,13 @@ const spreadProducts = async () => {
   });
 };
 
-const addToCart = () => {
+const addToCart = async () => {
   const button = document.querySelectorAll('.item__add');
   const list = document.querySelector('.cart__items');
-  button.forEach((btn) => btn.addEventListener('click', (ev) => {
-    const id = ev.target.parentNode.firstChild.innerText;
+  button.forEach((btn) => btn.addEventListener('click', async (ev) => {
+    const itemId = ev.target.parentNode.firstChild.innerText;
+    const { id, title, price } = await fetchItem(itemId);
+    list.appendChild(createCartItemElement({ sku: id, name: title, salePrice: price }));
   }));
 };
 
