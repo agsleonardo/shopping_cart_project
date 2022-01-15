@@ -34,7 +34,7 @@ const updatePrice = async () => {
   const labelPrice = document.querySelector('.total-price');
   const data = getSavedCartItems();
   const finalPrice = data.reduce((acc, cur) => acc + cur.salePrice, 0);
-  labelPrice.innerText = `$ ${finalPrice.toFixed(2)}`;
+  labelPrice.innerText = finalPrice;
 };
 
 function cartItemClickListener(event) {
