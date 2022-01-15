@@ -72,15 +72,13 @@ const clearCart = async () => {
 
 const addToCart = async () => {
   const button = document.querySelectorAll('.item__add');
+  let toUpload = [];
   button.forEach((btn) => btn.addEventListener('click', async (ev) => {
     const itemId = ev.target.parentNode.querySelector('span.item__sku').innerText;
     const { id, title, price } = await fetchItem(itemId);
     const objItem = { sku: id, name: title, salePrice: price };
     const newItem = createCartItemElement(objItem);
-    let toUpload = [];
-    if (localStorage.getItem('cartItems')) {
-      toUpload = JSON.parse(localStorage.getItem('cartItems'));
-    }
+    if (localStorage.getItem('cartItems')) toUpload = JSON.parse(localStorage.getItem('cartItems'));
     toUpload.push(objItem);
     saveCartItems(toUpload);
     listCart.appendChild(newItem);
@@ -88,8 +86,8 @@ const addToCart = async () => {
   }));
 };
 
-const loadItens = () => {
-  const savedItens = getSavedCartItems() ? JSON.parse(getSavedCartItems()) : [];
+const spreadStoredItems = () => {
+  const savedItens = loadStoredItems();
   savedItens.forEach(({ sku, name, salePrice }) => {
     listCart.appendChild(createCartItemElement({ sku, name, salePrice }));
   });
@@ -97,7 +95,7 @@ const loadItens = () => {
 
 const init = async () => {
   await spreadProducts();
-  loadItens();
+  spreadStoredItems();
   clearCart();
   addToCart();
   updatePrice();
