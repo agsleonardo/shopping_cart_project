@@ -1,8 +1,5 @@
 const saveCartItems = (item) => {
-  const toUpload = localStorage.getItem('cartItems')
-  ? JSON.parse(localStorage.getItem('cartItems')) : [];
-  toUpload.push(item);
-  localStorage.setItem('cartItems', JSON.stringify(toUpload));
+  localStorage.setItem('cartItems', JSON.stringify(item));
 };
 
 if (typeof module !== 'undefined') {

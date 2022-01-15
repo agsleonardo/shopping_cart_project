@@ -76,7 +76,12 @@ const addToCart = async () => {
     const { id, title, price } = await fetchItem(itemId);
     const objItem = { sku: id, name: title, salePrice: price };
     const newItem = createCartItemElement(objItem);
-    saveCartItems(objItem);
+    let toUpload = [];
+    if (localStorage.getItem('cartItems')) {
+      toUpload = JSON.parse(localStorage.getItem('cartItems'));
+    }
+    toUpload.push(objItem);
+    saveCartItems(toUpload);
     listCart.appendChild(newItem);
     updatePrice();
   }));
