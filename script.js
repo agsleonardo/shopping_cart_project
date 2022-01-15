@@ -26,16 +26,18 @@ function createProductItemElement({ sku, name, image }) {
   return section;
 }
 
+const loadStoredItems = () => (getSavedCartItems() ? JSON.parse(getSavedCartItems()) : []);
+
 const updatePrice = async () => {
   const labelPrice = document.querySelector('.total-price');
-  const data = getSavedCartItems() ? JSON.parse(getSavedCartItems()) : [];
+  const data = loadStoredItems();
   const finalPrice = data.reduce((acc, cur) => acc + cur.salePrice, 0);
   labelPrice.innerText = finalPrice;
 };
 
 function cartItemClickListener(event) {
   listCart.removeChild(event.target);
-  const data = getSavedCartItems() ? JSON.parse(getSavedCartItems()) : [];
+  const data = loadStoredItems();
   data.forEach((item, index) => (item.sku === event.target.id ? data.splice(index, 1) : ''));
   localStorage.setItem('cartItems', JSON.stringify(data));
   updatePrice();
