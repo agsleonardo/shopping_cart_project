@@ -42,6 +42,7 @@ function createCartItemElement({ sku, name, salePrice }) {
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
+  console.log(li);
   return li;
 }
 
@@ -56,20 +57,19 @@ const spreadProducts = async () => {
 const addToCart = async () => {
   const button = document.querySelectorAll('.item__add');
   button.forEach((btn) => btn.addEventListener('click', async (ev) => {
-    const itemId = ev.target.parentNode.firstChild.innerText;
+    const itemId = ev.target.parentNode.querySelector('span.item__sku').innerText;
     const { id, title, price } = await fetchItem(itemId);
-    const newItem = createCartItemElement({ sku: id, name: title, salePrice: price });
-    saveCartItems(newItem.outerHTML);
+    const objItem = { sku: id, name: title, salePrice: price };
+    const newItem = createCartItemElement(objItem);
+    saveCartItems(objItem);
     listCart.appendChild(newItem);
   }));
 };
 
 const loadItens = () => {
   const savedItens = getSavedCartItems();
-  savedItens.forEach((item) => {
-    const li = document.createElement('li');
-    li.innerHTML = item;
-    listCart.appendChild(li);
+  savedItens.forEach(({ sku, name, salePrice }) => {
+    listCart.appendChild(createCartItemElement({ sku, name, salePrice }));
   });
 };
 
