@@ -32,17 +32,18 @@ function createProductItemElement({ sku, name, image }) {
 
 function cartItemClickListener(event) {
   listCart.removeChild(event.target);
-  localStorage.setItem('cartItems', []);
-  const arr = [...listCart.children];
-  arr.forEach((item) => saveCartItems(item.outerHTML));
+  const data = getSavedCartItems();
+  console.log(data);
+  data.forEach((item, index) => (item.sku === event.target.id ? data.splice(index, 1) : ''));
+  localStorage.setItem('cartItems', JSON.stringify(data));
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
   const li = document.createElement('li');
+  li.id = sku;
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
-  console.log(li);
   return li;
 }
 
