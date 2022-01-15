@@ -138,6 +138,12 @@ body {
 .cart .cart__items {
   height: 500px;
   overflow-y: scroll;
+  margin: 10px;
+}
+
+
+.cart .cart__items li {
+  margin-bottom: 20px;
 }
 
 .empty-cart {
