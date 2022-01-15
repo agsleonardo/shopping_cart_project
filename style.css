@@ -152,3 +152,8 @@ body {
   text-align: center;
   margin: 10px;
 }
+
+.loading {
+  text-align: center;
+  margin: 20px;
+}
