@@ -55,6 +55,14 @@ const spreadProducts = async () => {
   });
 };
 
+const clearCart = async () => {
+  const button = document.querySelector('.empty-cart');
+  button.addEventListener('click', async () => {
+    listCart.innerHTML = '';
+    localStorage.setItem('cartItems', []);
+  });
+};
+
 const addToCart = async () => {
   const button = document.querySelectorAll('.item__add');
   button.forEach((btn) => btn.addEventListener('click', async (ev) => {
@@ -74,9 +82,13 @@ const loadItens = () => {
   });
 };
 
+const updatePrice = () => {
+
+};
 const init = async () => {
   await spreadProducts();
   loadItens();
+  clearCart();
   addToCart();
 };
 
