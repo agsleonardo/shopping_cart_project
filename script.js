@@ -31,8 +31,7 @@ const loadStoredItems = () => (getSavedCartItems() ? JSON.parse(getSavedCartItem
 const updatePrice = async () => {
   const labelPrice = document.querySelector('.total-price');
   const data = loadStoredItems();
-  const finalPrice = data.reduce((acc, cur) => acc + cur.salePrice, 0);
-  labelPrice.innerText = finalPrice;
+  labelPrice.innerText = data.reduce((acc, cur) => acc + cur.salePrice, 0);
 };
 
 function cartItemClickListener(event) {

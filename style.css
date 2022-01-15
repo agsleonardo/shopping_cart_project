@@ -148,9 +148,14 @@ body {
   background-color: rgb(249, 249, 246);
 }
 
-.total-price {
+.price {
   text-align: center;
   margin: 10px;
+}
+
+.price-container {
+  display: inline-flex;
+  justify-content: center;
 }
 
 .loading {
