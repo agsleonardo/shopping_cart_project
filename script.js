@@ -56,6 +56,8 @@ const spreadProducts = async () => {
   results.forEach(({ id: sku, title: name, thumbnail: image }) => {
     container.appendChild(createProductItemElement({ sku, name, image }));
   });
+  const msg = document.querySelector('.loading');
+  msg.remove();
 };
 
 const clearCart = async () => {
