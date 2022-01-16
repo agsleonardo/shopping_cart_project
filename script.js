@@ -17,12 +17,10 @@ function createCustomElement(element, className, innerText) {
 function createProductItemElement({ sku, name, image }) {
   const section = document.createElement('section');
   section.className = 'item';
-
   section.appendChild(createCustomElement('span', 'item__sku', sku));
   section.appendChild(createCustomElement('span', 'item__title', name));
   section.appendChild(createProductImageElement(image));
   section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
-
   return section;
 }
 
@@ -57,8 +55,7 @@ const spreadProducts = async () => {
   results.forEach(({ id: sku, title: name, thumbnail: image }) => {
     container.appendChild(createProductItemElement({ sku, name, image }));
   });
-  const msg = document.querySelector('.loading');
-  msg.remove();
+  document.querySelector('.loading').remove();
 };
 
 const clearCart = async () => {
@@ -72,13 +69,12 @@ const clearCart = async () => {
 
 const addToCart = async () => {
   const button = document.querySelectorAll('.item__add');
-  let toUpload = [];
+  const toUpload = JSON.parse(localStorage.getItem('cartItems') || '[]');
   button.forEach((btn) => btn.addEventListener('click', async (ev) => {
     const itemId = ev.target.parentNode.querySelector('span.item__sku').innerText;
     const { id, title, price } = await fetchItem(itemId);
     const objItem = { sku: id, name: title, salePrice: price };
     const newItem = createCartItemElement(objItem);
-    if (localStorage.getItem('cartItems')) toUpload = JSON.parse(localStorage.getItem('cartItems'));
     toUpload.push(objItem);
     saveCartItems(toUpload);
     listCart.appendChild(newItem);
