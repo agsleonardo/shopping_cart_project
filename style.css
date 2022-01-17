@@ -98,7 +98,7 @@ body {
   margin: 5px;
   width: 200px;
   border: 2px solid rgb(234, 234, 233);
-  border-radius: 5px;
+  border-radius: 25px;
   box-sizing: border-box;
 }
 
@@ -167,4 +167,11 @@ body {
 .loading {
   text-align: center;
   margin: 20px;
+}
+
+.item__price {
+  font-weight: 900;
+  text-align: center;
+  margin: 10px;
+  font-size: 22px;
 }
