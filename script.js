@@ -70,14 +70,14 @@ const clearCart = async () => {
 
 const addToCart = async () => {
   const button = document.querySelectorAll('.item__add');
-  const toUpload = JSON.parse(localStorage.getItem('cartItems') || '[]');
+  const toStore = JSON.parse(localStorage.getItem('cartItems') || '[]');
   button.forEach((btn) => btn.addEventListener('click', async (ev) => {
     const itemId = ev.target.parentNode.querySelector('span.item__sku').innerText;
     const { id, title, price } = await fetchItem(itemId);
     const objItem = { sku: id, name: title, salePrice: price };
     const newItem = createCartItemElement(objItem);
-    toUpload.push(objItem);
-    saveCartItems(JSON.stringify(toUpload));
+    toStore.push(objItem);
+    saveCartItems(JSON.stringify(toStore));
     listCart.appendChild(newItem);
     updatePrice();
   }));
