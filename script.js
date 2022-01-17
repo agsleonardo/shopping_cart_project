@@ -63,7 +63,7 @@ const clearCart = async () => {
   const button = document.querySelector('.empty-cart');
   button.addEventListener('click', async () => {
     listCart.innerHTML = '';
-    localStorage.setItem('cartItems', []);
+    localStorage.removeItem('cartItems');
     updatePrice();
   });
 };
