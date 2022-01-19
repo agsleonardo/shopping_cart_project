@@ -41,11 +41,13 @@ function cartItemClickListener(event) {
   updatePrice();
 }
 
-function createCartItemElement({ sku, name, salePrice }) {
+function createCartItemElement({ sku, name, salePrice, image }) {
   const li = document.createElement('li');
   li.id = sku;
   li.className = 'cart__item';
-  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
+  li.innerHTML = `SKU: ${sku} | NAME: ${name}
+  <br><strong>PRICE: <span style="color:red">$${salePrice}</span></strong>`;
+  li.style.backgroundImage = `url(${image})`;
   li.addEventListener('click', cartItemClickListener);
   return li;
 }
@@ -73,8 +75,9 @@ const addToCart = async () => {
   const toStore = JSON.parse(localStorage.getItem('cartItems') || '[]');
   button.forEach((btn) => btn.addEventListener('click', async (ev) => {
     const itemId = ev.target.parentNode.querySelector('span.item__sku').innerText;
-    const { id, title, price } = await fetchItem(itemId);
-    const objItem = { sku: id, name: title, salePrice: price };
+    const { id, title, price, thumbnail } = await fetchItem(itemId);
+    const image = thumbnail.replace(/[I]/, 'W');
+    const objItem = { sku: id, name: title, salePrice: price, image };
     const newItem = createCartItemElement(objItem);
     toStore.push(objItem);
     saveCartItems(JSON.stringify(toStore));
@@ -85,8 +88,8 @@ const addToCart = async () => {
 
 const spreadStoredItems = () => {
   const savedItens = loadStoredItems();
-  savedItens.forEach(({ sku, name, salePrice }) => {
-    listCart.appendChild(createCartItemElement({ sku, name, salePrice }));
+  savedItens.forEach(({ sku, name, salePrice, image }) => {
+    listCart.appendChild(createCartItemElement({ sku, name, salePrice, image }));
   });
 };
 

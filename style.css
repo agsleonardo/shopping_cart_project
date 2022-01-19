@@ -144,6 +144,19 @@ body {
 
 .cart .cart__items li {
   margin-bottom: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  list-style: none;
+  padding-left: 100px;
+  background-position: left top;
+}
+
+.cart .cart__items li:before {
+  margin-left: 50px;
+}
+
+.cart .cart__items .container {
+  margin-bottom: 20px;
 }
 
 .empty-cart {
