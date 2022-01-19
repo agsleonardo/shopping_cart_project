@@ -27,7 +27,7 @@ function createProductItemElement({ sku, name, image, price }) {
   return section;
 }
 
-const loadStoredItems = () => (getSavedCartItems() ? JSON.parse(getSavedCartItems()) : []);
+const loadStoredItems = () => JSON.parse(getSavedCartItems());
 
 const updatePrice = async () => {
   const labelPrice = document.querySelector('.total-price');
