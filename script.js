@@ -33,10 +33,10 @@ const updatePrice = async () => {
   labelPrice.innerText = data.reduce((acc, cur) => acc + cur.salePrice, 0);
 };
 
-function cartItemClickListener(event) {
-  listCart.removeChild(event.target);
+function cartItemClickListener({ target }) {
+  target.remove();
   const data = loadStoredItems();
-  data.forEach((item, index) => (item.sku === event.target.id ? data.splice(index, 1) : ''));
+  data.forEach((item, index) => (item.sku === target.id ? data.splice(index, 1) : ''));
   localStorage.setItem('cartItems', JSON.stringify(data));
   updatePrice();
 }
@@ -46,7 +46,7 @@ function createCartItemElement({ sku, name, salePrice, image }) {
   li.id = sku;
   li.className = 'cart__item';
   li.innerHTML = `SKU: ${sku} | NAME: ${name}
-  <br><strong>PRICE: <span style="color:red">$${salePrice}</span></strong>`;
+  <br><br><strong>PRICE: <span style="color:red">$${salePrice}</span></strong>`;
   li.style.backgroundImage = `url(${image})`;
   li.addEventListener('click', cartItemClickListener);
   return li;
