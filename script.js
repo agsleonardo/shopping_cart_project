@@ -1,5 +1,7 @@
 const listCart = document.querySelector('.cart__items');
 
+const improveImage = (url) => url.replace(/[I]/, 'W');
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -19,7 +21,7 @@ function createProductItemElement({ sku, name, image, price }) {
   section.className = 'item';
   section.appendChild(createCustomElement('span', 'item__sku', sku));
   section.appendChild(createCustomElement('span', 'item__title', name));
-  section.appendChild(createProductImageElement(image.replace(/[I]/, 'W')));
+  section.appendChild(createProductImageElement(improveImage(image)));
   section.appendChild(createCustomElement('span', 'item__price', `$ ${price}`));
   section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
   return section;
@@ -76,8 +78,7 @@ const addToCart = async () => {
   button.forEach((btn) => btn.addEventListener('click', async (ev) => {
     const itemId = ev.target.parentNode.querySelector('span.item__sku').innerText;
     const { id, title, price, thumbnail } = await fetchItem(itemId);
-    const image = thumbnail.replace(/[I]/, 'W');
-    const objItem = { sku: id, name: title, salePrice: price, image };
+    const objItem = { sku: id, name: title, salePrice: price, image: improveImage(thumbnail) };
     const newItem = createCartItemElement(objItem);
     toStore.push(objItem);
     saveCartItems(JSON.stringify(toStore));
