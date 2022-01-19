@@ -149,14 +149,11 @@ body {
   list-style: none;
   padding-left: 100px;
   background-position: left top;
+  cursor: pointer;
 }
 
-.cart .cart__items li:before {
-  margin-left: 50px;
-}
-
-.cart .cart__items .container {
-  margin-bottom: 20px;
+.cart .cart__items li:hover {
+  background-color: rgb(233, 233, 233);
 }
 
 .empty-cart {
@@ -165,6 +162,7 @@ body {
   margin: 0 auto;
   border: 2px solid rgb(5, 52, 219);
   background-color: rgb(249, 249, 246);
+  cursor: pointer;
 }
 
 .price {
