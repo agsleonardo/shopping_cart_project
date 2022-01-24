@@ -32,7 +32,7 @@ const loadStoredItems = () => JSON.parse(getSavedCartItems());
 const updatePrice = async () => {
   const labelPrice = document.querySelector('.total-price');
   const data = loadStoredItems();
-  labelPrice.innerText = data.reduce((acc, cur) => acc + cur.salePrice, 0);
+  labelPrice.innerText = data.reduce((acc, cur) => acc + cur.salePrice, 0).toFixed(2);
 };
 
 function cartItemClickListener({ target }) {
@@ -74,14 +74,14 @@ const clearCart = async () => {
 
 const addToCart = async () => {
   const button = document.querySelectorAll('.item__add');
-  const toStore = JSON.parse(localStorage.getItem('cartItems') || '[]');
   button.forEach((btn) => btn.addEventListener('click', async (ev) => {
+    const toStore = JSON.parse(getSavedCartItems());
     const itemId = ev.target.parentNode.querySelector('span.item__sku').innerText;
     const { id, title, price, thumbnail } = await fetchItem(itemId);
     const objItem = { sku: id, name: title, salePrice: price, image: improveImage(thumbnail) };
-    const newItem = createCartItemElement(objItem);
     toStore.push(objItem);
     saveCartItems(JSON.stringify(toStore));
+    const newItem = createCartItemElement(objItem);
     listCart.appendChild(newItem);
     updatePrice();
   }));

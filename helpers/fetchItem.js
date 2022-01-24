@@ -5,8 +5,5 @@ const fetchItem = (item) => {
   .catch(() => { throw new Error('You must provide an url'); });
 };
 
-if (typeof module !== 'undefined') {
-  module.exports = {
-    fetchItem,
-  };
-}
+module.exports = { fetchItem };
+
